@@ -33,7 +33,7 @@ def on_chat_message(msg):
                 print("forward to "+str(id))
                 print(bot.getChat(chat_id))
                 try:
-                    bot.sendMessage(id, "An interesting @TopRDNtransfers whale was detected at '"+bot.getChat(chat_id)["title"]+"'")
+                    bot.sendMessage(id, "Keyword detected '"+bot.getChat(chat_id)["title"]+"'")
                 except KeyError, e:
                     bot.sendMessage(id, bot.getChat(chat_id)["username"]+" mentioned a keyword")
                 print(message_id)
@@ -53,7 +53,7 @@ def on_chat_message(msg):
             bot.sendMessage(chat_id, "You're unsubscribed from the bot")
         
         if "/list" in msg["text"]:
-            s = "Whales: "
+            s = "Keywords: "
             for key in keywords:
                 s += key+", "
             bot.sendMessage(chat_id, s)
@@ -63,14 +63,14 @@ def on_chat_message(msg):
             for key in newKeys:
                 if key != "":
                     keywords.add(key.lower())
-            s = "Whale ID (e.g. 0x123): "
+            s = "Keyword: "
             for key in keywords:
                 s += key+", "
             bot.sendMessage(chat_id, s)
         
         if "/remove" in msg["text"]:
             keywords.remove( msg["text"][7:].replace(" ",""))
-            s = "Whale ID (e.g. 0x123):"
+            s = "Keyword:"
             for key in keywords:
                 s += key+", "
             bot.sendMessage(chat_id, s)
